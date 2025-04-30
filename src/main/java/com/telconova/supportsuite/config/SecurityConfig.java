@@ -1,0 +1,23 @@
+package com.telconova.supportsuite.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration  
+@EnableWebSecurity  
+public class SecurityConfig {  
+    @Bean  
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {  
+        http  
+            .csrf().disable()  
+            .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/graphql", "/hola").permitAll()  // Permitir acceso sin autenticación a /graphql y /hola
+                .anyRequest().authenticated()  
+            )
+            .httpBasic();  
+        return http.build();  
+    }  
+}
