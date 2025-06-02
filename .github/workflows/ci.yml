@@ -29,6 +29,9 @@ jobs:
       - name: Generate test reports
         run: mvn surefire-report:report
         
+      - name: Verificar contenido del directorio de reportes
+        run: ls -l target/site/ || echo "No existe target/site/"
+
       - name: Upload test reports
         uses: actions/upload-artifact@v3
         with:
