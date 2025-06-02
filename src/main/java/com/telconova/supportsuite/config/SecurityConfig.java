@@ -14,7 +14,7 @@ public class SecurityConfig {
         http  
             .csrf().disable()  
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/graphql", "/hola").permitAll()  // Permitir acceso sin autenticación a /graphql y /hola
+                .requestMatchers("/graphql", "/hola", "/api/age/**").permitAll()  // Añadido /api/age/**
                 .anyRequest().authenticated()  
             )
             .httpBasic();  
