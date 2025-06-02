@@ -32,8 +32,13 @@ jobs:
       - name: Verificar contenido del directorio de reportes
         run: ls -l target/site/ || echo "No existe target/site/"
 
-      - name: Upload test reports
-        uses: actions/upload-artifact@v3
+      - name: Subir reportes de pruebas
+        uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: target/site/
+          if-no-files-found: warn   # Opcional: puedes usar 'warn', 'error' o 'ignore'
+          retention-days: 7         # Opcional: ajusta según lo que necesites
+          compression-level: 6      # Opcional: valor por defecto
+          overwrite: true           # Opcional: sobrescribe si ya existe un artifact con el mismo nombre
+          include-hidden-files: false # Opcional: incluye archivos ocultos si lo necesitas
