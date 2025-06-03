@@ -37,8 +37,16 @@ jobs:
         with:
           name: test-reports
           path: target/site/
-          if-no-files-found: warn   # Opcional: puedes usar 'warn', 'error' o 'ignore'
-          retention-days: 7         # Opcional: ajusta según lo que necesites
-          compression-level: 6      # Opcional: valor por defecto
-          overwrite: true           # Opcional: sobrescribe si ya existe un artifact con el mismo nombre
-          include-hidden-files: false # Opcional: incluye archivos ocultos si lo necesitas
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 6
+          overwrite: true
+          include-hidden-files: false
+      
+      # Guardar el JAR para usarlo en el despliegue
+      - name: Subir artefacto JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: application-jar
+          path: target/*.jar
+          if-no-files-found: error
